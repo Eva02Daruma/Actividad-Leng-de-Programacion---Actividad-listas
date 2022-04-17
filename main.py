@@ -17,13 +17,8 @@ clienteTipo = ""
 clienteSubscripciones = "Default"
 #Listas
 tipoCliente = ["Premium","Gold","Silver"]
-clientes = [[]]
-#validacion de respuesta
-# opRuns = False
+clientes = []
 
-  
-  #Opciones del Menu
-    
 #Registar Cliente
 def menu():
   opValida = False
@@ -42,12 +37,20 @@ loop = 1
 while loop == 1:
   optionMenu = menu()
   print(optionMenu)
+  #Opciones del Menu
   if optionMenu == 1:
           #Registrar un cliente
           print("Registar un Cliente")
           print("Ingresar Datos del Cliente :")
           clienteNombre = input("Ingresar Nombre del cliente : \n")
-          clienteRut = input("Ingresar Rut del cliente : \n")
+          opRut = False
+          while opRut == False:
+            clienteRut = int(input("Ingresar Rut del cliente : \n"))
+            if clienteRut > 4000000 and clienteRut < 99999999:
+              opRut = True
+            else:
+              opRut= False
+              print("Porfavor Ingresar Informacion Correcta!")
           clienteDireccion = input("Ingresar Direccion del cliente : \n")
           clienteComuna = input("Ingresar Comuna del cliente : \n")
           clienteCorreo = input("Ingresar Correo del cliente : \n")
@@ -93,29 +96,8 @@ while loop == 1:
               opTipocliente = False
 
           #Registrar los datos
-          if numCliente == 0:
-            clientes[0].append(clienteNombre)
-            clientes[0].append(clienteRut)
-            clientes[0].append(clienteDireccion)
-            clientes[0].append(clienteComuna)
-            clientes[0].append(clienteCorreo)
-            clientes[0].append(clienteEdad)
-            clientes[0].append(clienteGenero)
-            clientes[0].append(clienteCelular)
-            clientes[0].append(clienteTipo)
-            numCliente = numCliente + 1
-          else:
-            clientes[numCliente].append(clienteNombre)
-            clientes[numCliente].append(clienteRut)
-            clientes[numCliente].append(clienteDireccion)
-            clientes[numCliente].append(clienteComuna)
-            clientes[numCliente].append(clienteCorreo)
-            clientes[numCliente].append(clienteEdad)
-            clientes[numCliente].append(clienteGenero)
-            clientes[numCliente].append(clienteCelular)
-            clientes[numCliente].append(clienteTipo)
-            numCliente = numCliente + 1
-          print("volviendo al menu principal !!")
+            clientes.append([clienteNombre,clienteRut,clienteDireccion, clienteComuna, clienteCorreo, clienteEdad, clienteGenero, clienteCelular, clienteTipo, clienteSubscripciones])
+            
           
       
   elif optionMenu == 2:
@@ -123,6 +105,8 @@ while loop == 1:
     #Consultar Datos Cliente
   elif optionMenu == 3:
       print("Consultar Datos Cliente")
+      for i in clientes:
+        print(i)
     #Salir
   elif optionMenu == 4:
       print("Salir")
